@@ -238,3 +238,6 @@ backend/.env
 *.sqlite3
 backend/db.sqlite3
 
+# Assessment References & Documentation
+references/
+
