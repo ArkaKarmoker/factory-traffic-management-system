@@ -1,0 +1,219 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[none]{hyphenat} % This line disables automatic hyphenation globally
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{graphicx}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \begin{minipage}[t]{0.78\textwidth}
+        \vspace{0pt}
+        {\Huge \textbf{\scshape Arka Karmoker}} \\[8pt]
+        \small Dhaka, Bangladesh \\
+        \small +8801590153299 \\
+        \small \href{mailto:arkakarmoker1234@gmail.com}{\textcolor{blue}{arkakarmoker1234@gmail.com}} \\
+        \small \href{https://linkedin.com/in/arkakarmoker}{\textcolor{blue}{linkedin.com/in/arkakarmoker}} \\
+        \small \href{https://github.com/ArkaKarmoker}{\textcolor{blue}{github.com/ArkaKarmoker}} \\
+        \small \href{https://arkakarmoker.com/}{\textcolor{blue}{arkakarmoker.com}}
+    \end{minipage}
+    &
+    \begin{minipage}[t]{0.18\textwidth}
+        \vspace{0pt}
+        \raggedleft
+        \setlength{\fboxsep}{2pt} % Padding inside the frame
+        \setlength{\fboxrule}{0.8pt} % Thickness of the frame
+        \fbox{\includegraphics[width=1.25in,height=1.25in,keepaspectratio]{profile_pic.jpg}}
+    \end{minipage}
+\end{tabular*}
+
+%-----------SUMMARY-----------
+\section{Professional Summary}
+\small{Dedicated Software Engineer and Backend Developer specializing in Python and Django. Experienced in building and deploying robust, scalable web applications with advanced AI integration, demonstrating a practical ability to turn concepts into efficient code. With a strong foundation in computer science fundamentals, I am a proactive learner always ready to master new technologies and solve complex engineering challenges.}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \item
+      \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{B.Sc. in Computer Science \& Engineering (CSE)} & Feb 2021 -- May 2026 \\
+        \small CGPA: 2.62/4.00 (Second Class) & \\
+        \textit{\small North South University} & \textit{\small Basundhara R/A, Dhaka, Bangladesh} \\
+      \end{tabular*}
+      \vspace{4pt}
+    \item
+      \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{Higher Secondary Certificate (HSC) -- Science} & Passing Year: 2019 \\
+        \small GPA: 3.92/5.00 $|$ Dhaka Board & \\
+        \textit{\small Major General Mahmudul Hasan Adarsha College} & \textit{\small Tangail, Bangladesh} \\
+      \end{tabular*}
+      \vspace{4pt}
+    \item
+      \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{Secondary School Certificate (SSC) -- Science} & Passing Year: 2017 \\
+        \small GPA: 5.00/5.00 $|$ Dhaka Board & \\
+        \textit{\small Bindu Basini Govt. Boys' High School} & \textit{\small Tangail, Bangladesh} \\
+      \end{tabular*}
+  \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \begin{tabularx}{\linewidth}{@{}l@{\hspace{0.5em}}X@{}}
+       \textbf{Languages:} & Python, JavaScript, SQL \\
+       \textbf{Backend:} & Python, Django, Django Rest Framework (DRF), REST APIs, JWT, OAuth2 \\
+       \textbf{Frontend:} & HTML, CSS, Bootstrap, Tailwind CSS, JavaScript, jQuery, AJAX \\
+       \textbf{Database:} & SQL, PostgreSQL, MySQL, Supabase, Redis \\
+       \textbf{AI:} & RAG Pipeline, LLM API, LangChain, LlamaIndex, FAISS, pgvector, Hugging Face Models, Pandas, NumPy, Scikit-Learn, TensorFlow, PyTorch, Machine Learning, Deep Learning \\
+       \textbf{Tools:} & VS Code, Git, GitHub, Docker, Postman, Antigravity IDE, Cursor, Excel, PowerPoint, Word \\
+       \textbf{Soft Skills:} & Problem Solving, Effective Communication, Team Collaboration, Time Management, Adaptability, Critical Thinking \\
+     \end{tabularx}
+    }}
+ \end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{BinaryFusion}: Complete SAAS Trading Tool $|$ \emph{Django, PostgreSQL, Tailwind CSS, NOWPayments}}{\href{https://github.com/ArkaKarmoker/BinaryFusion}{\textcolor{blue}{Code}} $|$ \href{https://www.binaryfusion.trade/}{\textcolor{blue}{Live}}}
+          \resumeItemListStart
+            \resumeItem{Architected a full-stack trading SaaS delivering algorithmic market signals via a consensus of technical indicators, featuring automated NOWPayments crypto billing and tiered token subscriptions.}
+          \resumeItemListEnd
+          
+      \resumeProjectHeading
+          {\textbf{FoodFinder}: Dynamic Nearby Restaurants $|$ \emph{Django, PostgreSQL, OpenStreetMap API, PayPal}}{\href{https://github.com/ArkaKarmoker/FoodFinder}{\textcolor{blue}{Code}} $|$ \href{http://foodfinder-bd.onrender.com/}{\textcolor{blue}{Live}}}
+          \resumeItemListStart
+            \resumeItem{Engineered a multi-vendor restaurant marketplace featuring PostGIS-powered geospatial radius search, multi-restaurant cart ordering, vendor menu dashboards, and integrated PayPal checkout.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{MedRec}: Medicine Information Chatbot $|$ \emph{Django, Supabase, pgvector, LlamaIndex, Gemini, Hugging Face}}{\href{https://github.com/ArkaKarmoker/MedRec}{\textcolor{blue}{Code}} $|$ \href{https://medrec-bd.onrender.com}{\textcolor{blue}{Live}}}
+          \resumeItemListStart
+            \resumeItem{Developed a scalable RAG medical chatbot orchestrating LlamaIndex, Supabase (pgvector), and Google Gemini with Hugging Face embeddings for accurate, context-grounded medicine information retrieval.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{MedRev}: Medicine Review Platform $|$ \emph{Django Rest Framework (DRF), Next.js, PostgreSQL}}{\href{https://github.com/ArkaKarmoker/MedRev}{\textcolor{blue}{Code}} $|$ \href{https://medrev-bd.vercel.app}{\textcolor{blue}{Live}}}
+          \resumeItemListStart
+            \resumeItem{Architected a decoupled full-stack medicine platform using DRF and Next.js, featuring JWT authentication, multi-criteria filtering across medicine directories, and community-driven rating and review systems.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Ecommerce API}: Scalable E-commerce Backend $|$ \emph{Django, DRF, PostgreSQL, Redis, Docker}}{\href{https://github.com/ArkaKarmoker/raco-ai-ecommerce-backend}{\textcolor{blue}{Code}} $|$ \href{https://documenter.getpostman.com/view/53341122/2sBY4Qtzmm}{\textcolor{blue}{Docs}}}
+          \resumeItemListStart
+            \resumeItem{Engineered a scalable DRF backend featuring Redis-cached DFS category hierarchies, Strategy Pattern payment routing (Stripe, bKash), and row-level database locking to prevent inventory race conditions.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+ \begin{itemize}[labelindent=0.15in, leftmargin=*, label=\textbullet, itemsep=1pt, topsep=2pt]
+    \resumeItem{\href{https://www.datacamp.com/certificate/AIEDA0011756179688}{\textcolor{blue}{AI Engineer for Developers Associate}} -- DataCamp}
+    \resumeItem{\href{https://www.datacamp.com/certificate/DE0018753864581}{\textcolor{blue}{Data Engineer}} -- DataCamp}
+    \resumeItem{\href{https://www.datacamp.com/completed/statement-of-accomplishment/track/6241b35f61541c4e5378793c75d6c6b6a9674259}{\textcolor{blue}{GitHub Foundations}} -- DataCamp}
+    \resumeItem{\href{https://www.kaggle.com/learn/certification/arkakarmoker/intermediate-machine-learning}{\textcolor{blue}{Intermediate Machine Learning}} -- Kaggle}
+    \resumeItem{\href{https://www.hackerrank.com/certificates/8264e4b3456c}{\textcolor{blue}{Software Engineer}} -- HackerRank}
+    \resumeItem{\href{https://www.hackerrank.com/certificates/b501fa45af73}{\textcolor{blue}{Python Basic}} -- HackerRank}
+ \end{itemize}
+
+%-----------ACHIEVEMENTS-----------
+\section{Achievements}
+ \begin{itemize}[labelindent=0.15in, leftmargin=*, label=\textbullet, itemsep=1pt, topsep=2pt]
+    \resumeItem{\textbf{Problem Solving:} Solved 100+ challenges on \href{https://leetcode.com/u/arka_karmoker/}{\textcolor{blue}{LeetCode}} focusing on data structures and algorithms.}
+    \resumeItem{\textbf{Open Source:} Maintained \href{https://github.com/ArkaKarmoker?tab=repositories}{\textcolor{blue}{35+ GitHub repositories}} demonstrating continuous learning and project development, alongside publishing 1 dataset and 3 notebooks on \href{https://www.kaggle.com/arkakarmoker}{\textcolor{blue}{Kaggle}}.}
+ \end{itemize}
+
+%-----------LANGUAGE PROFICIENCY-----------
+\section{Language Proficiency}
+ \begin{itemize}[labelindent=0.15in, leftmargin=*, label=\textbullet, itemsep=1pt, topsep=2pt]
+    \resumeItem{\textbf{English:} Professional Working Proficiency}
+    \resumeItem{\textbf{Bengali:} Native Proficiency}
+ \end{itemize}
+
+%-----------PERSONAL DETAILS-----------
+\section{Personal Details}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \begin{tabularx}{\linewidth}{@{}p{0.25\linewidth}@{\hspace{0.5em}}X@{}}
+       \textbf{Full Name:} & Arka Karmoker \\
+       \textbf{Father's Name:} & Polton Kumer Karmoker \\
+       \textbf{Mother's Name:} & Sabita Roy \\
+       \textbf{Date of Birth:} & 19th May 2001 \\
+       \textbf{Gender:} & Male \\
+       \textbf{Religion:} & Hinduism \\
+       \textbf{Marital Status:} & Single \\
+       \textbf{Nationality:} & Bangladeshi \\
+       \textbf{Phone:} & +8801590153299 \\
+       \textbf{Email:} & arkakarmoker1234@gmail.com \\
+       \textbf{Blood Group:} & O+ \\
+       \textbf{Present Address:} & Kuril Mridhabari, Kuril, Vatara, Dhaka-1229, Bangladesh \\
+       \textbf{Permanent Address:} & Vill: Kalipur, P.O: Dighulia-1900, P.S: Tangail Sadar, District: Tangail \\
+     \end{tabularx}
+    }}
+ \end{itemize}
+
+\end{document}
