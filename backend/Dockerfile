@@ -21,5 +21,5 @@ COPY . /app/
 
 EXPOSE 8000
 
-# Default entrypoint runs migrations, seeds, and boots server
-CMD ["sh", "-c", "python manage.py migrate && python manage.py seed_junction && python manage.py runserver 0.0.0.0:8000"]
+# Production entrypoint runs migrations, seeds default data, and boots gunicorn
+CMD ["sh", "-c", "python manage.py migrate && python manage.py seed_junction && gunicorn core.wsgi:application --bind 0.0.0.0:${PORT:-8000}"]

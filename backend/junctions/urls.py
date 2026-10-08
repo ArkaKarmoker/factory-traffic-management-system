@@ -4,6 +4,7 @@ Strictly matches Section 10 Minimum Backend APIs.
 """
 from django.urls import path
 from junctions.views import (
+    HealthCheckView,
     JunctionListCreateView,
     JunctionDetailView,
     JunctionStatusView,
@@ -17,6 +18,9 @@ from junctions.views import (
 )
 
 urlpatterns = [
+    # Health probe for UptimeRobot / Cloud Keep-Alive (/api/health)
+    path("health", HealthCheckView.as_view(), name="health-check"),
+
     # 10.1 Junctions
     path("junctions", JunctionListCreateView.as_view(), name="junction-list-create"),
     path("junctions/<str:id>", JunctionDetailView.as_view(), name="junction-detail"),

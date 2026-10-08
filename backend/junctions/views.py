@@ -24,6 +24,28 @@ from junctions.services import JunctionService
 from traffic_engine.enums import Direction, TrafficPhase, JunctionMode, SignalState, ControllerStatus, TransitionStep
 
 
+class HealthCheckView(APIView):
+    """
+    GET /api/health - Lightweight health probe for UptimeRobot / Cloud Keep-Alive
+    """
+    authentication_classes = []
+    permission_classes = []
+
+    @extend_schema(
+        summary="Service health check probe",
+        responses={200: OpenApiResponse(description="Service healthy")},
+    )
+    def get(self, request):
+        return Response(
+            {
+                "status": "healthy",
+                "service": "factory-traffic-management-system",
+                "timestamp": timezone.now().isoformat(),
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
 class JunctionListCreateView(APIView):
     """
     GET /api/junctions - List all registered junctions

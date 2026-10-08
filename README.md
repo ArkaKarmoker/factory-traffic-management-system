@@ -18,50 +18,43 @@ The system is built on **Hexagonal / Clean Architecture** with pure Python domai
 
 ```mermaid
 flowchart TD
-    subgraph FrontendLayer["🖥️ Frontend Client Layer (Next.js 14)"]
-        UI["Interactive Dashboard<br/>Tailwind CSS + shadcn/ui"]
-        Viz["Visual 4-Way Intersection"]
-        Sim["Evaluator Simulator Panel"]
-        UI --- Viz
-        UI --- Sim
+    Client["Client / Browser / Postman"]
+
+    Client -->|HTTP REST APIs| Backend
+
+    subgraph CoreSystem["Core System"]
+        Backend["Django REST Framework Backend"]
+
+        Backend --> SensorModule["Sensor Event Ingestion & Deduplication"]
+        Backend --> TrafficEngine["Traffic Domain Engine & Deterministic FSM"]
+        Backend --> ManualControl["Supervisor Manual Override Controls"]
+        Backend --> ControllerPort["Controller Interface Port (Hexagonal)"]
     end
 
-    subgraph ApiLayer["🌐 API & Communication Layer (Django REST Framework)"]
-        SensorAPI["/api/sensor-events<br/><i>Idempotent Ingestion</i>"]
-        StatusAPI["/api/junctions/:id/status<br/><i>Live Telemetry Polling</i>"]
-        CommandAPI["/api/junctions/:id/commands<br/><i>Supervisor Override</i>"]
+    SensorModule -->|Idempotency Check| EventsDB
+    TrafficEngine -->|Row-level Locks| MainDB
+    TrafficEngine -->|ACID Transactions & Row Locking| MainDB
+    ControllerPort -->|API / Intent| PhysController
+    ControllerPort -->|Execute / Query| RoadsideSensors
+
+    subgraph DataLayer["Data & Persistence Layer"]
+        EventsDB[("ProcessedEvent Deduplication")]
+        MainDB[("PostgreSQL DB / SQLite WAL")]
     end
 
-    subgraph CoreEngine["🚦 Core Domain Engine (traffic_engine/ - Pure Python 3.12)"]
-        FSM["Deterministic FSM<br/>GREEN (30s) -> YELLOW (5s) -> ALL-RED (2s) -> GREEN"]
-        Scheduler["Composite Priority Scheduler<br/>Vehicle Weights + Anti-Starvation Boost"]
-        Guard["Safety Invariant Guard<br/>Conflicting Greens Mathematically Prevented"]
-        FSM --- Scheduler
-        Scheduler --- Guard
+    subgraph HardwareLayer["External Hardware & Simulators"]
+        RoadsideSensors["Roadside IoT Sensors"]
+        PhysController["Physical Signal Controller"]
     end
 
-    subgraph PersistenceLayer["💾 Persistence Layer (Database)"]
-        DB[("PostgreSQL 16 / SQLite WAL<br/>select_for_update Row Locks")]
-        Events["ProcessedEvent (Idempotency)"]
-        Queues["VehicleQueueItem (FIFO Queues)"]
-        Audit["AuditLog (Immutable History)"]
-        DB --> Events
-        DB --> Queues
-        DB --> Audit
+    RoadsideSensors -->|Forward Sensor Events| Backend
+    PhysController -->|ACK & Telemetry Events| Backend
+
+    subgraph FrontendApp["Frontend Monitoring & Control"]
+        NextUI["Next.js 14 Visual Intersection Dashboard"]
     end
 
-    subgraph HardwareLayer["🔌 Controller Port (Hexagonal Architecture)"]
-        Port["TrafficControllerPort<br/><i>(Abstract Port)</i>"]
-        RESTAdapt["REST Simulator Adapter<br/><i>(Active Telemetry)</i>"]
-        MQTTAdapt["MQTT Adapter<br/><i>(Pluggable Future Adapter)</i>"]
-        Port --> RESTAdapt
-        Port -.-> MQTTAdapt
-    end
-
-    FrontendLayer -->|HTTP REST / JSON| ApiLayer
-    ApiLayer -->|Clean DTOs & Intent Commands| CoreEngine
-    CoreEngine -->|Atomic State Mutations| PersistenceLayer
-    CoreEngine -->|Signal Commands & ACK Telemetry| HardwareLayer
+    NextUI -->|Adaptive Telemetry Polling| Backend
 ```
 
 ---

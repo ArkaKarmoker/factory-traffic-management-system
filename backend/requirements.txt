@@ -8,6 +8,10 @@ django-cors-headers==4.9.0
 psycopg[binary]==3.3.6
 python-dotenv==1.2.4
 
+# Production Server & Static Files
+gunicorn==22.0.0
+whitenoise==6.7.0
+
 # Automated Testing
 pytest==9.1.1
 pytest-django==4.14.0
