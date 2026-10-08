@@ -16,31 +16,40 @@ The system is built on **Hexagonal / Clean Architecture** with pure Python domai
 
 ## 🏛️ System Architecture
 
-```text
-+-------------------------------------------------------------------------------+
-|                             FRONTEND (Next.js 14)                             |
-|       Visual 4-Way Intersection • Live Telemetry Polling • Test Simulator     |
-+---------------------------------------+---------------------------------------+
-                                        | REST API (JSON)
-+---------------------------------------v---------------------------------------+
-|                       COMMUNICATION & APIS (Django REST)                      |
-|       /api/sensor-events • /api/junctions/:id/status • /api/commands          |
-+---------------------------------------+---------------------------------------+
-                                        | Domain DTOs
-+---------------------------------------v---------------------------------------+
-|                    CORE DOMAIN ENGINE (Pure Python 3.12)                      |
-|       - Deterministic FSM: GREEN -> YELLOW (5s) -> ALL-RED (2s) -> GREEN     |
-|       - Composite Priority Scheduler with Anti-Starvation Protection          |
-|       - Runtime Invariant Guard: Conflicting Greens are impossible            |
-+-------------------+---------------------------------------+-------------------+
-                    |                                       |
-                    v                                       v
-+-------------------+-------------------+   +---------------+-------------------+
-|         PERSISTENCE LAYER             |   |     CONTROLLER INTERFACE / PORT   |
-|   PostgreSQL 16 / SQLite 3 (WAL)      |   |   TrafficControllerPort (Port)    |
-|   - select_for_update() Row Locking   |   |   - REST Simulator Adapter        |
-|   - Idempotency & Queue Tracking      |   |   - Future MQTT Adapter           |
-+---------------------------------------+   +-----------------------------------+
+```mermaid
+flowchart TD
+    subgraph FRONTEND ["Client Layer (Frontend)"]
+        FE["🖥️ Next.js 14 Dashboard<br/>• Visual 4-Way Intersection<br/>• Live Telemetry Polling<br/>• Evaluator Test Simulator"]
+    end
+
+    subgraph API_LAYER ["Communication & API Layer"]
+        DRF["⚡ Django REST Framework<br/>• /api/sensor-events (Idempotent Ingestion)<br/>• /api/junctions/:id/status (Live Telemetry)<br/>• /api/junctions/:id/commands (Supervisor Override)"]
+    end
+
+    subgraph DOMAIN ["Core Domain Engine (Hexagonal Architecture)"]
+        FSM["⚙️ Deterministic Finite State Machine<br/>GREEN (30s) ➔ YELLOW (5s) ➔ ALL-RED (2s) ➔ NEXT GREEN"]
+        SCHED["📊 Composite Priority Scheduler<br/>Emergency (1000) • Truck (25) • Forklift (15) • Employee (5)<br/>+ Anti-Starvation Boost (+80 after 45s)"]
+        INV["🛡️ Runtime Invariant Guard<br/>Zero Conflicting Green • Strict Safety Clearance"]
+    end
+
+    subgraph STORAGE ["Persistence Layer"]
+        DB[("🗄️ PostgreSQL 16 / SQLite 3 WAL<br/>• select_for_update() Concurrency Locks<br/>• Idempotent Event Deduplication<br/>• Immutable AuditLog History")]
+    end
+
+    subgraph CONTROLLER ["Hardware Controller Port & Adapters"]
+        PORT["🔌 TrafficControllerPort (Abstract Interface)"]
+        REST_AD["📡 REST Simulator Adapter (Active Telemetry)"]
+        MQTT_AD["⚡ Future MQTT Adapter (Industrial Broker)"]
+    end
+
+    FE -->|"HTTP REST / JSON"| DRF
+    DRF -->|"Domain DTOs & Commands"| FSM
+    FSM --- SCHED
+    FSM --- INV
+    FSM -->|"Atomic State Updates"| DB
+    FSM -->|"Dispatches Signal State"| PORT
+    PORT -.-> REST_AD
+    PORT -.-> MQTT_AD
 ```
 
 ---
