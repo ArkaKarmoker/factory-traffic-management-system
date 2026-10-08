@@ -18,38 +18,50 @@ The system is built on **Hexagonal / Clean Architecture** with pure Python domai
 
 ```mermaid
 flowchart TD
-    subgraph FRONTEND ["Client Layer (Frontend)"]
-        FE["🖥️ Next.js 14 Dashboard<br/>• Visual 4-Way Intersection<br/>• Live Telemetry Polling<br/>• Evaluator Test Simulator"]
+    subgraph FrontendLayer["🖥️ Frontend Client Layer (Next.js 14)"]
+        UI["Interactive Dashboard<br/>Tailwind CSS + shadcn/ui"]
+        Viz["Visual 4-Way Intersection"]
+        Sim["Evaluator Simulator Panel"]
+        UI --- Viz
+        UI --- Sim
     end
 
-    subgraph API_LAYER ["Communication & API Layer"]
-        DRF["⚡ Django REST Framework<br/>• /api/sensor-events (Idempotent Ingestion)<br/>• /api/junctions/:id/status (Live Telemetry)<br/>• /api/junctions/:id/commands (Supervisor Override)"]
+    subgraph ApiLayer["🌐 API & Communication Layer (Django REST Framework)"]
+        SensorAPI["/api/sensor-events<br/><i>Idempotent Ingestion</i>"]
+        StatusAPI["/api/junctions/:id/status<br/><i>Live Telemetry Polling</i>"]
+        CommandAPI["/api/junctions/:id/commands<br/><i>Supervisor Override</i>"]
     end
 
-    subgraph DOMAIN ["Core Domain Engine (Hexagonal Architecture)"]
-        FSM["⚙️ Deterministic Finite State Machine<br/>GREEN (30s) ➔ YELLOW (5s) ➔ ALL-RED (2s) ➔ NEXT GREEN"]
-        SCHED["📊 Composite Priority Scheduler<br/>Emergency (1000) • Truck (25) • Forklift (15) • Employee (5)<br/>+ Anti-Starvation Boost (+80 after 45s)"]
-        INV["🛡️ Runtime Invariant Guard<br/>Zero Conflicting Green • Strict Safety Clearance"]
+    subgraph CoreEngine["🚦 Core Domain Engine (traffic_engine/ - Pure Python 3.12)"]
+        FSM["Deterministic FSM<br/>GREEN (30s) -> YELLOW (5s) -> ALL-RED (2s) -> GREEN"]
+        Scheduler["Composite Priority Scheduler<br/>Vehicle Weights + Anti-Starvation Boost"]
+        Guard["Safety Invariant Guard<br/>Conflicting Greens Mathematically Prevented"]
+        FSM --- Scheduler
+        Scheduler --- Guard
     end
 
-    subgraph STORAGE ["Persistence Layer"]
-        DB[("🗄️ PostgreSQL 16 / SQLite 3 WAL<br/>• select_for_update() Concurrency Locks<br/>• Idempotent Event Deduplication<br/>• Immutable AuditLog History")]
+    subgraph PersistenceLayer["💾 Persistence Layer (Database)"]
+        DB[("PostgreSQL 16 / SQLite WAL<br/>select_for_update Row Locks")]
+        Events["ProcessedEvent (Idempotency)"]
+        Queues["VehicleQueueItem (FIFO Queues)"]
+        Audit["AuditLog (Immutable History)"]
+        DB --> Events
+        DB --> Queues
+        DB --> Audit
     end
 
-    subgraph CONTROLLER ["Hardware Controller Port & Adapters"]
-        PORT["🔌 TrafficControllerPort (Abstract Interface)"]
-        REST_AD["📡 REST Simulator Adapter (Active Telemetry)"]
-        MQTT_AD["⚡ Future MQTT Adapter (Industrial Broker)"]
+    subgraph HardwareLayer["🔌 Controller Port (Hexagonal Architecture)"]
+        Port["TrafficControllerPort<br/><i>(Abstract Port)</i>"]
+        RESTAdapt["REST Simulator Adapter<br/><i>(Active Telemetry)</i>"]
+        MQTTAdapt["MQTT Adapter<br/><i>(Pluggable Future Adapter)</i>"]
+        Port --> RESTAdapt
+        Port -.-> MQTTAdapt
     end
 
-    FE -->|"HTTP REST / JSON"| DRF
-    DRF -->|"Domain DTOs & Commands"| FSM
-    FSM --- SCHED
-    FSM --- INV
-    FSM -->|"Atomic State Updates"| DB
-    FSM -->|"Dispatches Signal State"| PORT
-    PORT -.-> REST_AD
-    PORT -.-> MQTT_AD
+    FrontendLayer -->|HTTP REST / JSON| ApiLayer
+    ApiLayer -->|Clean DTOs & Intent Commands| CoreEngine
+    CoreEngine -->|Atomic State Mutations| PersistenceLayer
+    CoreEngine -->|Signal Commands & ACK Telemetry| HardwareLayer
 ```
 
 ---
