@@ -218,3 +218,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Virtual Environments
+venv/
+backend/venv/
+ENV/
+env/
+
+# Node & Next.js
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+frontend/.env.local
+
+# Sensitive Environment files & Databases
+.env
+backend/.env
+*.sqlite3
+backend/db.sqlite3
+

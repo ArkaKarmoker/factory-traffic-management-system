@@ -1,0 +1,2122 @@
+{
+  "info": {
+    "_postman_id": "8b5d4ae6-9773-4b37-9fc7-fe8979115687",
+    "name": "Factory Traffic Management System (FTMS) API",
+    "description": "Comprehensive Postman Collection for CSI Smart Tech Assessment V2. Implements Section 10 Minimum Backend APIs, Section 8 Manual Control, Section 9 Hardware Telemetry, and Section 15 Scenarios.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53341122",
+    "_collection_link": "https://go.postman.co/collection/53341122-8b5d4ae6-9773-4b37-9fc7-fe8979115687?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Junctions & Live Telemetry",
+      "item": [
+        {
+          "name": "List All Junctions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions"
+              ]
+            },
+            "description": "Returns all registered junctions in the facility (Section 10.1)."
+          },
+          "response": [
+            {
+              "name": "List All Junctions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:43:07 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "GET, POST, HEAD, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "626"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"junction_id\": \"A\",\n    \"name\": \"Factory Road Intersection A\",\n    \"mode\": \"MANUAL\",\n    \"current_phase\": \"NORTH_SOUTH\",\n    \"target_phase\": null,\n    \"transition_step\": \"STEADY\",\n    \"controller_status\": \"ONLINE\",\n    \"desired_signals\": {\n      \"NORTH\": \"GREEN\",\n      \"SOUTH\": \"GREEN\",\n      \"EAST\": \"RED\",\n      \"WEST\": \"RED\"\n    },\n    \"actual_signals\": {\n      \"NORTH\": \"GREEN\",\n      \"SOUTH\": \"GREEN\",\n      \"EAST\": \"RED\",\n      \"WEST\": \"RED\"\n    },\n    \"queues\": {\n      \"NORTH\": 7,\n      \"SOUTH\": 0,\n      \"EAST\": 0,\n      \"WEST\": 0\n    },\n    \"emergency_active\": false,\n    \"emergency_direction\": null,\n    \"manual_requested_direction\": \"NORTH\",\n    \"green_duration\": 30,\n    \"yellow_duration\": 5,\n    \"all_red_duration\": 2,\n    \"created_at\": \"2026-10-07T22:14:51.785374Z\",\n    \"updated_at\": \"2026-10-08T05:20:19.416883Z\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get Junction A Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A"
+              ]
+            },
+            "description": "Retrieves configuration and full model representation of Junction A."
+          },
+          "response": [
+            {
+              "name": "Get Junction A Details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:45:18 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "624"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"junction_id\": \"A\",\n  \"name\": \"Factory Road Intersection A\",\n  \"mode\": \"MANUAL\",\n  \"current_phase\": \"NORTH_SOUTH\",\n  \"target_phase\": null,\n  \"transition_step\": \"STEADY\",\n  \"controller_status\": \"ONLINE\",\n  \"desired_signals\": {\n    \"NORTH\": \"GREEN\",\n    \"SOUTH\": \"GREEN\",\n    \"EAST\": \"RED\",\n    \"WEST\": \"RED\"\n  },\n  \"actual_signals\": {\n    \"NORTH\": \"GREEN\",\n    \"SOUTH\": \"GREEN\",\n    \"EAST\": \"RED\",\n    \"WEST\": \"RED\"\n  },\n  \"queues\": {\n    \"NORTH\": 7,\n    \"SOUTH\": 0,\n    \"EAST\": 0,\n    \"WEST\": 0\n  },\n  \"emergency_active\": false,\n  \"emergency_direction\": null,\n  \"manual_requested_direction\": \"NORTH\",\n  \"green_duration\": 30,\n  \"yellow_duration\": 5,\n  \"all_red_duration\": 2,\n  \"created_at\": \"2026-10-07T22:14:51.785374Z\",\n  \"updated_at\": \"2026-10-08T05:20:19.416883Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Live Junction Status & Signals",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "status"
+              ]
+            },
+            "description": "Retrieves real-time operational telemetry, desired vs actual signals, current phase, and queue counts (Section 10.3)."
+          },
+          "response": [
+            {
+              "name": "Get Live Junction Status & Signals",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:45:35 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "586"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"junction_id\": \"A\",\n  \"name\": \"Factory Road Intersection A\",\n  \"mode\": \"MANUAL\",\n  \"phase\": \"NORTH_SOUTH\",\n  \"target_phase\": null,\n  \"transition_step\": \"STEADY\",\n  \"controller_status\": \"ONLINE\",\n  \"desired_signals\": {\n    \"NORTH\": \"GREEN\",\n    \"SOUTH\": \"GREEN\",\n    \"EAST\": \"RED\",\n    \"WEST\": \"RED\"\n  },\n  \"actual_signals\": {\n    \"NORTH\": \"GREEN\",\n    \"SOUTH\": \"GREEN\",\n    \"EAST\": \"RED\",\n    \"WEST\": \"RED\"\n  },\n  \"queues\": {\n    \"NORTH\": 7,\n    \"SOUTH\": 0,\n    \"EAST\": 0,\n    \"WEST\": 0\n  },\n  \"emergency_active\": false,\n  \"emergency_direction\": null,\n  \"manual_requested_direction\": \"NORTH\",\n  \"pending_command_id\": null,\n  \"phase_started_at\": \"2026-10-08T05:11:05.908026Z\",\n  \"step_started_at\": \"2026-10-08T05:11:05.908026Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Waiting Queues Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/queues",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "queues"
+              ]
+            },
+            "description": "Retrieves detailed individual vehicles waiting in the queues ordered by arrival time."
+          },
+          "response": [
+            {
+              "name": "Get Waiting Queues Detail",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/queues",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "queues"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:45:52 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "1177"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 115,\n    \"vehicle_id\": \"VH-FL-501\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 7917,\n    \"arrived_at\": \"2026-10-08T05:12:18.806125Z\",\n    \"sensor_timestamp\": null\n  },\n  {\n    \"id\": 116,\n    \"vehicle_id\": \"VH-FL-501\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 6378,\n    \"arrived_at\": \"2026-10-08T05:12:20.818727Z\",\n    \"sensor_timestamp\": null\n  },\n  {\n    \"id\": 117,\n    \"vehicle_id\": \"VH-FL-501\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 6232,\n    \"arrived_at\": \"2026-10-08T05:12:23.059760Z\",\n    \"sensor_timestamp\": null\n  },\n  {\n    \"id\": 118,\n    \"vehicle_id\": \"VH-FL-501\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 7093,\n    \"arrived_at\": \"2026-10-08T05:12:26.730722Z\",\n    \"sensor_timestamp\": null\n  },\n  {\n    \"id\": 119,\n    \"vehicle_id\": \"VH-FL-501\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 4761,\n    \"arrived_at\": \"2026-10-08T05:12:26.877228Z\",\n    \"sensor_timestamp\": null\n  },\n  {\n    \"id\": 120,\n    \"vehicle_id\": \"VH-FL-501\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 6744,\n    \"arrived_at\": \"2026-10-08T05:12:27.004059Z\",\n    \"sensor_timestamp\": null\n  },\n  {\n    \"id\": 123,\n    \"vehicle_id\": \"VH-FL-502\",\n    \"vehicle_type\": \"FORKLIFT\",\n    \"direction\": \"NORTH\",\n    \"sequence_no\": 8857,\n    \"arrived_at\": \"2026-10-08T05:20:19.415550Z\",\n    \"sensor_timestamp\": null\n  }\n]"
+            }
+          ]
+        }
+      ],
+      "description": "Endpoints to query junction registration, configuration, queues, and live signal telemetry (Section 10.1 & 10.3)."
+    },
+    {
+      "name": "2. Sensor Events (Vehicle Detection)",
+      "item": [
+        {
+          "name": "Vehicle Arrived (Forklift - Priority 15)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"evt-fl-101\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"VH-FL-501\",\n  \"vehicle_type\": \"FORKLIFT\",\n  \"sequence_no\": 1001\n}\n",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/sensor-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "sensor-events"
+              ]
+            },
+            "description": "Ingests vehicle arrival event. Increments queue count and triggers scheduling evaluation."
+          },
+          "response": [
+            {
+              "name": "Vehicle Arrived (Forklift - Priority 15)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_id\": \"evt-fl-101\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"VH-FL-501\",\n  \"vehicle_type\": \"FORKLIFT\",\n  \"sequence_no\": 1001\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/sensor-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "sensor-events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:47:57 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "359"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"DUPLICATE_VEHICLE_IGNORED\",\n  \"message\": \"Vehicle 'VH-FL-501' is already queued at NORTH. Duplicate vehicle queue addition rejected.\",\n  \"result\": {\n    \"event_id\": \"evt-fl-101\",\n    \"junction_id\": \"A\",\n    \"vehicle_id\": \"VH-FL-501\",\n    \"status\": \"DUPLICATE_VEHICLE_IGNORED\",\n    \"current_mode\": \"MANUAL\",\n    \"current_phase\": \"NORTH_SOUTH\",\n    \"queues\": {\n      \"NORTH\": 7,\n      \"SOUTH\": 0,\n      \"EAST\": 0,\n      \"WEST\": 0\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Vehicle Arrived (Truck - Priority 25)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"evt-trk-201\",\n  \"junction_id\": \"A\",\n  \"direction\": \"EAST\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"VH-TRK-801\",\n  \"vehicle_type\": \"TRUCK\",\n  \"sequence_no\": 1002,\n  \"timestamp\": \"2026-10-08T10:01:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/sensor-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "sensor-events"
+              ]
+            },
+            "description": "Ingests high-priority material truck on EAST approach."
+          },
+          "response": [
+            {
+              "name": "Vehicle Arrived (Truck - Priority 25)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_id\": \"evt-trk-201\",\n  \"junction_id\": \"A\",\n  \"direction\": \"EAST\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"VH-TRK-801\",\n  \"vehicle_type\": \"TRUCK\",\n  \"sequence_no\": 1002,\n  \"timestamp\": \"2026-10-08T10:01:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/sensor-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "sensor-events"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:48:13 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "225"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Sensor event processed successfully\",\n  \"result\": {\n    \"event_id\": \"evt-trk-201\",\n    \"junction_id\": \"A\",\n    \"current_mode\": \"MANUAL\",\n    \"current_phase\": \"NORTH_SOUTH\",\n    \"queues\": {\n      \"NORTH\": 7,\n      \"SOUTH\": 0,\n      \"EAST\": 1,\n      \"WEST\": 0\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Emergency Vehicle Arrived (Preemption)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"evt-emerg-911\",\n  \"junction_id\": \"A\",\n  \"direction\": \"WEST\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"AMB-911\",\n  \"vehicle_type\": \"EMERGENCY\",\n  \"sequence_no\": 1003,\n  \"timestamp\": \"2026-10-08T10:02:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/sensor-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "sensor-events"
+              ]
+            },
+            "description": "Section 7 Emergency Preemption: Immediately begins safe transition (YELLOW 5s -> ALL-RED 2s -> WEST GREEN)."
+          },
+          "response": [
+            {
+              "name": "Emergency Vehicle Arrived (Preemption)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_id\": \"evt-emerg-911\",\n  \"junction_id\": \"A\",\n  \"direction\": \"WEST\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"AMB-911\",\n  \"vehicle_type\": \"EMERGENCY\",\n  \"sequence_no\": 1003,\n  \"timestamp\": \"2026-10-08T10:02:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/sensor-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "sensor-events"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:48:19 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "230"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Sensor event processed successfully\",\n  \"result\": {\n    \"event_id\": \"evt-emerg-911\",\n    \"junction_id\": \"A\",\n    \"current_mode\": \"EMERGENCY\",\n    \"current_phase\": \"NORTH_SOUTH\",\n    \"queues\": {\n      \"NORTH\": 7,\n      \"SOUTH\": 0,\n      \"EAST\": 1,\n      \"WEST\": 1\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Vehicle Cleared from Queue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"evt-clr-101\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"event_type\": \"VEHICLE_CLEARED\",\n  \"vehicle_id\": \"VH-FL-501\",\n  \"sequence_no\": 1004,\n  \"timestamp\": \"2026-10-08T10:03:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/sensor-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "sensor-events"
+              ]
+            },
+            "description": "Removes a vehicle after it clears the intersection. Prevents queue from becoming negative."
+          },
+          "response": [
+            {
+              "name": "Vehicle Cleared from Queue",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_id\": \"evt-clr-101\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"event_type\": \"VEHICLE_CLEARED\",\n  \"vehicle_id\": \"VH-FL-501\",\n  \"sequence_no\": 1004,\n  \"timestamp\": \"2026-10-08T10:03:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/sensor-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "sensor-events"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:48:24 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "228"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Sensor event processed successfully\",\n  \"result\": {\n    \"event_id\": \"evt-clr-101\",\n    \"junction_id\": \"A\",\n    \"current_mode\": \"EMERGENCY\",\n    \"current_phase\": \"NORTH_SOUTH\",\n    \"queues\": {\n      \"NORTH\": 6,\n      \"SOUTH\": 0,\n      \"EAST\": 1,\n      \"WEST\": 1\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Idempotency Test (Duplicate Event ID)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event_id\": \"evt-fl-101\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"VH-FL-501\",\n  \"vehicle_type\": \"FORKLIFT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/sensor-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "sensor-events"
+              ]
+            },
+            "description": "Section 4 & 10.2 Idempotency Requirement: Exact duplicate event_id is safely acknowledged (200 DUPLICATE_IGNORED) without modifying queue multiple times."
+          },
+          "response": [
+            {
+              "name": "Idempotency Test (Duplicate Event ID)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event_id\": \"evt-fl-101\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"event_type\": \"VEHICLE_ARRIVED\",\n  \"vehicle_id\": \"VH-FL-501\",\n  \"vehicle_type\": \"FORKLIFT\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/sensor-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "sensor-events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:48:29 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "172"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"DUPLICATE_IGNORED\",\n  \"message\": \"Event already processed (Idempotent response - no state mutation)\",\n  \"result\": {\n    \"event_id\": \"evt-fl-101\",\n    \"status\": \"DUPLICATE_IGNORED\"\n  }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Vehicle arrival and departure events ingested from roadside IoT sensors (Section 10.2, 4, & 5)."
+    },
+    {
+      "name": "3. Manual Supervisor Control",
+      "item": [
+        {
+          "name": "Manual Green Request (WEST)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Admin-Token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"MANUAL_GREEN_REQUEST\",\n  \"direction\": \"WEST\",\n  \"operator_id\": \"ADMIN_CHIEF\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/commands",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "commands"
+              ]
+            },
+            "description": "Section 8 Manual Override: Initiates safe transition to WEST/EAST green."
+          },
+          "response": [
+            {
+              "name": "Manual Green Request (WEST)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Admin-Token",
+                    "value": "{{adminToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": \"MANUAL_GREEN_REQUEST\",\n  \"direction\": \"WEST\",\n  \"operator_id\": \"ADMIN_CHIEF\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/commands",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "commands"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:50:33 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "170"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Manual green request initiated safely for WEST.\",\n  \"result\": {\n    \"mode\": \"MANUAL\",\n    \"target_phase\": \"EAST_WEST\",\n    \"transition_step\": \"YELLOW_CLEARING\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Manual Green Request (NORTH)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Admin-Token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"MANUAL_GREEN_REQUEST\",\n  \"direction\": \"NORTH\",\n  \"operator_id\": \"ADMIN_CHIEF\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/commands",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "commands"
+              ]
+            },
+            "description": "Requests manual green for NORTH approach."
+          },
+          "response": [
+            {
+              "name": "Manual Green Request (NORTH)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Admin-Token",
+                    "value": "{{adminToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": \"MANUAL_GREEN_REQUEST\",\n  \"direction\": \"NORTH\",\n  \"operator_id\": \"ADMIN_CHIEF\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/commands",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "commands"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:50:43 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "173"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Manual green request initiated safely for NORTH.\",\n  \"result\": {\n    \"mode\": \"MANUAL\",\n    \"target_phase\": \"NORTH_SOUTH\",\n    \"transition_step\": \"YELLOW_CLEARING\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Return to Automatic Engine",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Admin-Token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"RETURN_TO_AUTOMATIC\",\n  \"operator_id\": \"ADMIN_CHIEF\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/commands",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "commands"
+              ]
+            },
+            "description": "Returns junction to AUTOMATIC state machine scheduling."
+          },
+          "response": [
+            {
+              "name": "Return to Automatic Engine",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "X-Admin-Token",
+                    "value": "{{adminToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": \"RETURN_TO_AUTOMATIC\",\n  \"operator_id\": \"ADMIN_CHIEF\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/commands",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "commands"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:50:52 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "129"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Junction returned to AUTOMATIC operating mode.\",\n  \"result\": {\n    \"mode\": \"AUTOMATIC\",\n    \"phase\": \"EAST_WEST\"\n  }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Administrative control commands enforcing safety transition sequence (Section 10.4 & 8)."
+    },
+    {
+      "name": "4. Physical Controller Hardware Telemetry",
+      "item": [
+        {
+          "name": "Physical Controller ACK Confirmation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command_id\": \"cmd-8001\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"status\": \"ACK\",\n  \"actual_state\": \"GREEN\",\n  \"device_type\": \"SIGNAL_CONTROLLER\",\n  \"timestamp\": \"2026-10-08T10:05:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/controller-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "controller-events"
+              ]
+            },
+            "description": "Simulates physical hardware confirming requested signal state."
+          },
+          "response": [
+            {
+              "name": "Physical Controller ACK Confirmation",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command_id\": \"cmd-8001\",\n  \"junction_id\": \"A\",\n  \"direction\": \"NORTH\",\n  \"status\": \"ACK\",\n  \"actual_state\": \"GREEN\",\n  \"device_type\": \"SIGNAL_CONTROLLER\",\n  \"timestamp\": \"2026-10-08T10:05:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/controller-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "controller-events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:49:23 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "88"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Controller event logged.\",\n  \"result\": {\n    \"status\": \"RECORDED\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Simulate Controller OFFLINE (Degraded Fallback)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"junction_id\": \"A\",\n  \"device_type\": \"SIGNAL_CONTROLLER\",\n  \"status\": \"OFFLINE\",\n  \"timestamp\": \"2026-10-08T10:06:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/controller-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "controller-events"
+              ]
+            },
+            "description": "Section 9 Failure Handling: Puts junction into DEGRADED mode with desired ALL-RED safety fallback while preserving unconfirmed physical telemetry."
+          },
+          "response": [
+            {
+              "name": "Simulate Controller OFFLINE (Degraded Fallback)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"junction_id\": \"A\",\n  \"device_type\": \"SIGNAL_CONTROLLER\",\n  \"status\": \"OFFLINE\",\n  \"timestamp\": \"2026-10-08T10:06:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/controller-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "controller-events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:49:51 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "358"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Controller reported OFFLINE. Junction transitioned to DEGRADED mode with desired ALL-RED (Awaiting confirmation).\",\n  \"result\": {\n    \"controller_status\": \"OFFLINE\",\n    \"mode\": \"DEGRADED\",\n    \"desired_signals\": {\n      \"NORTH\": \"RED\",\n      \"SOUTH\": \"RED\",\n      \"EAST\": \"RED\",\n      \"WEST\": \"RED\"\n    },\n    \"actual_signals\": {\n      \"NORTH\": \"RED\",\n      \"SOUTH\": \"RED\",\n      \"EAST\": \"YELLOW\",\n      \"WEST\": \"YELLOW\"\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Simulate Controller ONLINE Restoration",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"junction_id\": \"A\",\n  \"device_type\": \"SIGNAL_CONTROLLER\",\n  \"status\": \"ONLINE\",\n  \"timestamp\": \"2026-10-08T10:07:00Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "text"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/controller-events",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "controller-events"
+              ]
+            },
+            "description": "Restores controller to ONLINE status and resumes normal operation."
+          },
+          "response": [
+            {
+              "name": "Simulate Controller ONLINE Restoration",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"junction_id\": \"A\",\n  \"device_type\": \"SIGNAL_CONTROLLER\",\n  \"status\": \"ONLINE\",\n  \"timestamp\": \"2026-10-08T10:07:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8000/api/controller-events",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "controller-events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:49:39 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "229"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Controller restored ONLINE. System resumed normal operation.\",\n  \"result\": {\n    \"controller_status\": \"ONLINE\",\n    \"mode\": \"AUTOMATIC\",\n    \"actual_signals\": {\n      \"NORTH\": \"RED\",\n      \"SOUTH\": \"RED\",\n      \"EAST\": \"GREEN\",\n      \"WEST\": \"GREEN\"\n    }\n  }\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Physical signal controller state acknowledgements and hardware failure telemetry (Section 10.5 & 9)."
+    },
+    {
+      "name": "5. Audit History & Simulation Helpers",
+      "item": [
+        {
+          "name": "Get Full Audit Trail (Limit 50)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/history?limit=50",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Section 10.6 & 11: Retrieves immutable audit trail of state transitions, preemption, and controller events."
+          },
+          "response": [
+            {
+              "name": "Get Full Audit Trail (Limit 50)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/history?limit=50",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:51:58 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "14608"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 976,\n    \"junction_id\": \"A\",\n    \"event_type\": \"RETURN_TO_AUTOMATIC\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"operator\": \"ADMIN_CHIEF\"\n    },\n    \"timestamp\": \"2026-10-08T05:50:52.315860Z\"\n  },\n  {\n    \"id\": 975,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_TRANSITION_STARTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"from_phase\": \"EAST_WEST\",\n      \"target_phase\": \"NORTH_SOUTH\",\n      \"step\": \"YELLOW_CLEARING\"\n    },\n    \"timestamp\": \"2026-10-08T05:50:43.181091Z\"\n  },\n  {\n    \"id\": 974,\n    \"junction_id\": \"A\",\n    \"event_type\": \"MANUAL_OVERRIDE_REQUESTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"requested_direction\": \"NORTH\",\n      \"operator\": \"ADMIN_CHIEF\"\n    },\n    \"timestamp\": \"2026-10-08T05:50:43.179092Z\"\n  },\n  {\n    \"id\": 973,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_TRANSITION_STARTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"from_phase\": \"EAST_WEST\",\n      \"target_phase\": \"EAST_WEST\",\n      \"step\": \"YELLOW_CLEARING\"\n    },\n    \"timestamp\": \"2026-10-08T05:50:33.595505Z\"\n  },\n  {\n    \"id\": 972,\n    \"junction_id\": \"A\",\n    \"event_type\": \"MANUAL_OVERRIDE_REQUESTED\",\n    \"direction\": \"WEST\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"requested_direction\": \"WEST\",\n      \"operator\": \"ADMIN_CHIEF\"\n    },\n    \"timestamp\": \"2026-10-08T05:50:33.591209Z\"\n  },\n  {\n    \"id\": 971,\n    \"junction_id\": \"A\",\n    \"event_type\": \"CONTROLLER_OFFLINE_DEGRADED_FALLBACK\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"reason\": \"Physical controller reported OFFLINE. Backend demanded fail-safe ALL-RED; actual signals unconfirmed awaiting reconnection.\",\n      \"desired_signals\": {\n        \"NORTH\": \"RED\",\n        \"SOUTH\": \"RED\",\n        \"EAST\": \"RED\",\n        \"WEST\": \"RED\"\n      },\n      \"actual_signals\": {\n        \"NORTH\": \"RED\",\n        \"SOUTH\": \"RED\",\n        \"EAST\": \"YELLOW\",\n        \"WEST\": \"YELLOW\"\n      }\n    },\n    \"timestamp\": \"2026-10-08T05:49:51.687745Z\"\n  },\n  {\n    \"id\": 970,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_TRANSITION_STARTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"from_phase\": \"EAST_WEST\",\n      \"target_phase\": \"NORTH_SOUTH\",\n      \"step\": \"YELLOW_CLEARING\"\n    },\n    \"timestamp\": \"2026-10-08T05:49:47.977708Z\"\n  },\n  {\n    \"id\": 969,\n    \"junction_id\": \"A\",\n    \"event_type\": \"CONTROLLER_ONLINE_RESTORED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"status\": \"ONLINE\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:49:39.697080Z\"\n  },\n  {\n    \"id\": 968,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:49:32.775218Z\"\n  },\n  {\n    \"id\": 967,\n    \"junction_id\": \"A\",\n    \"event_type\": \"TRANSITION_STEP_ALL_RED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"clearing_to_phase\": \"EAST_WEST\"\n    },\n    \"timestamp\": \"2026-10-08T05:49:30.747945Z\"\n  },\n  {\n    \"id\": 966,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_TRANSITION_STARTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"from_phase\": \"NORTH_SOUTH\",\n      \"target_phase\": \"EAST_WEST\",\n      \"step\": \"YELLOW_CLEARING\"\n    },\n    \"timestamp\": \"2026-10-08T05:49:25.677268Z\"\n  },\n  {\n    \"id\": 965,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:55.319028Z\"\n  },\n  {\n    \"id\": 964,\n    \"junction_id\": \"A\",\n    \"event_type\": \"TRANSITION_STEP_ALL_RED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"clearing_to_phase\": \"NORTH_SOUTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:53.284675Z\"\n  },\n  {\n    \"id\": 963,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_TRANSITION_STARTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"from_phase\": \"EAST_WEST\",\n      \"target_phase\": \"NORTH_SOUTH\",\n      \"step\": \"YELLOW_CLEARING\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:48.218369Z\"\n  },\n  {\n    \"id\": 962,\n    \"junction_id\": \"A\",\n    \"event_type\": \"EMERGENCY_CLEARED_AUTO_RESUME\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"reason\": \"Emergency served, returned to AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:47.188313Z\"\n  },\n  {\n    \"id\": 961,\n    \"junction_id\": \"A\",\n    \"event_type\": \"IDEMPOTENT_DUPLICATE_REJECTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"event_id\": \"evt-fl-101\",\n      \"reason\": \"Exact event_id previously processed\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:29.408666Z\"\n  },\n  {\n    \"id\": 960,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"EMERGENCY\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:26.733488Z\"\n  },\n  {\n    \"id\": 959,\n    \"junction_id\": \"A\",\n    \"event_type\": \"VEHICLE_CLEARED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:24.933320Z\"\n  },\n  {\n    \"id\": 958,\n    \"junction_id\": \"A\",\n    \"event_type\": \"TRANSITION_STEP_ALL_RED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"clearing_to_phase\": \"EAST_WEST\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:24.697901Z\"\n  },\n  {\n    \"id\": 957,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_TRANSITION_STARTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"from_phase\": \"NORTH_SOUTH\",\n      \"target_phase\": \"EAST_WEST\",\n      \"step\": \"YELLOW_CLEARING\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:19.009237Z\"\n  },\n  {\n    \"id\": 956,\n    \"junction_id\": \"A\",\n    \"event_type\": \"EMERGENCY_PREEMPTION_TRIGGERED\",\n    \"direction\": \"WEST\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"approaching_direction\": \"WEST\",\n      \"target_phase\": \"EAST_WEST\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:18.998236Z\"\n  },\n  {\n    \"id\": 955,\n    \"junction_id\": \"A\",\n    \"event_type\": \"VEHICLE_ARRIVED\",\n    \"direction\": \"WEST\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"AMB-911\",\n      \"vehicle_type\": \"EMERGENCY\",\n      \"sequence_no\": 1003\n    },\n    \"timestamp\": \"2026-10-08T05:48:18.996750Z\"\n  },\n  {\n    \"id\": 954,\n    \"junction_id\": \"A\",\n    \"event_type\": \"VEHICLE_ARRIVED\",\n    \"direction\": \"EAST\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-TRK-801\",\n      \"vehicle_type\": \"TRUCK\",\n      \"sequence_no\": 1002\n    },\n    \"timestamp\": \"2026-10-08T05:48:12.993706Z\"\n  },\n  {\n    \"id\": 953,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:47:57.215915Z\"\n  },\n  {\n    \"id\": 952,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:15.259604Z\"\n  },\n  {\n    \"id\": 951,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:15.079759Z\"\n  },\n  {\n    \"id\": 950,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:14.880041Z\"\n  },\n  {\n    \"id\": 949,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:14.336409Z\"\n  },\n  {\n    \"id\": 948,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:13.462200Z\"\n  },\n  {\n    \"id\": 947,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:10.832005Z\"\n  },\n  {\n    \"id\": 946,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:08.927189Z\"\n  },\n  {\n    \"id\": 945,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:07.752601Z\"\n  },\n  {\n    \"id\": 944,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:02.632468Z\"\n  },\n  {\n    \"id\": 943,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:02.457040Z\"\n  },\n  {\n    \"id\": 942,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:02.247601Z\"\n  },\n  {\n    \"id\": 941,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:02.048445Z\"\n  },\n  {\n    \"id\": 940,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:01.882586Z\"\n  },\n  {\n    \"id\": 939,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:01.688511Z\"\n  },\n  {\n    \"id\": 938,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:01.529064Z\"\n  },\n  {\n    \"id\": 937,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:01.326983Z\"\n  },\n  {\n    \"id\": 936,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:01.151346Z\"\n  },\n  {\n    \"id\": 935,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:21:00.200425Z\"\n  },\n  {\n    \"id\": 934,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:58.318963Z\"\n  },\n  {\n    \"id\": 933,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:44.841037Z\"\n  },\n  {\n    \"id\": 932,\n    \"junction_id\": \"A\",\n    \"event_type\": \"IDEMPOTENT_DUPLICATE_REJECTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"event_id\": \"evt-346996\",\n      \"reason\": \"Exact event_id previously processed\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:39.237304Z\"\n  },\n  {\n    \"id\": 931,\n    \"junction_id\": \"A\",\n    \"event_type\": \"IDEMPOTENT_DUPLICATE_REJECTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"event_id\": \"evt-346996\",\n      \"reason\": \"Exact event_id previously processed\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:38.679344Z\"\n  },\n  {\n    \"id\": 930,\n    \"junction_id\": \"A\",\n    \"event_type\": \"IDEMPOTENT_DUPLICATE_REJECTED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"event_id\": \"evt-346996\",\n      \"reason\": \"Exact event_id previously processed\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:33.846518Z\"\n  },\n  {\n    \"id\": 929,\n    \"junction_id\": \"A\",\n    \"event_type\": \"VEHICLE_ARRIVED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-502\",\n      \"vehicle_type\": \"FORKLIFT\",\n      \"sequence_no\": 8857\n    },\n    \"timestamp\": \"2026-10-08T05:20:19.416381Z\"\n  },\n  {\n    \"id\": 928,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:15.238809Z\"\n  },\n  {\n    \"id\": 927,\n    \"junction_id\": \"A\",\n    \"event_type\": \"DUPLICATE_VEHICLE_REJECTED\",\n    \"direction\": \"NORTH\",\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"vehicle_id\": \"VH-FL-501\",\n      \"already_in_direction\": \"NORTH\",\n      \"reason\": \"Vehicle 'VH-FL-501' is already waiting in queue at NORTH\"\n    },\n    \"timestamp\": \"2026-10-08T05:20:13.240046Z\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Filter Audit History by Event Type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/history?event_type=SIGNAL_CHANGED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "history"
+              ],
+              "query": [
+                {
+                  "key": "event_type",
+                  "value": "SIGNAL_CHANGED"
+                }
+              ]
+            },
+            "description": "Filters audit history by specific event type (e.g. SIGNAL_CHANGED, VEHICLE_ARRIVED, EMERGENCY_PREEMPTION_TRIGGERED)."
+          },
+          "response": [
+            {
+              "name": "Filter Audit History by Event Type",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/history?event_type=SIGNAL_CHANGED",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "history"
+                  ],
+                  "query": [
+                    {
+                      "key": "event_type",
+                      "value": "SIGNAL_CHANGED"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:52:52 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "GET, HEAD, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "11689"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 968,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:49:32.775218Z\"\n  },\n  {\n    \"id\": 965,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:55.319028Z\"\n  },\n  {\n    \"id\": 960,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"EMERGENCY\"\n    },\n    \"timestamp\": \"2026-10-08T05:48:26.733488Z\"\n  },\n  {\n    \"id\": 909,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"MANUAL\"\n    },\n    \"timestamp\": \"2026-10-08T05:11:05.911783Z\"\n  },\n  {\n    \"id\": 905,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:10:39.461347Z\"\n  },\n  {\n    \"id\": 902,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:10:02.077625Z\"\n  },\n  {\n    \"id\": 899,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:09:24.633437Z\"\n  },\n  {\n    \"id\": 896,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:08:47.170881Z\"\n  },\n  {\n    \"id\": 893,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:08:09.639927Z\"\n  },\n  {\n    \"id\": 890,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:06:44.171244Z\"\n  },\n  {\n    \"id\": 887,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:06:06.856735Z\"\n  },\n  {\n    \"id\": 884,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:05:29.350198Z\"\n  },\n  {\n    \"id\": 881,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:04:51.814063Z\"\n  },\n  {\n    \"id\": 878,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:04:14.202591Z\"\n  },\n  {\n    \"id\": 875,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:03:36.609277Z\"\n  },\n  {\n    \"id\": 872,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:02:58.882572Z\"\n  },\n  {\n    \"id\": 869,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:02:21.061551Z\"\n  },\n  {\n    \"id\": 866,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:01:43.919762Z\"\n  },\n  {\n    \"id\": 863,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:01:06.062712Z\"\n  },\n  {\n    \"id\": 860,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T05:00:28.569357Z\"\n  },\n  {\n    \"id\": 857,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T04:59:51.093909Z\"\n  },\n  {\n    \"id\": 854,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T04:59:13.360432Z\"\n  },\n  {\n    \"id\": 827,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"EMERGENCY\"\n    },\n    \"timestamp\": \"2026-10-08T03:19:24.520275Z\"\n  },\n  {\n    \"id\": 817,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"EMERGENCY\"\n    },\n    \"timestamp\": \"2026-10-08T02:53:24.366173Z\"\n  },\n  {\n    \"id\": 812,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"MANUAL\"\n    },\n    \"timestamp\": \"2026-10-08T02:53:02.071444Z\"\n  },\n  {\n    \"id\": 806,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"MANUAL\"\n    },\n    \"timestamp\": \"2026-10-08T02:39:36.805130Z\"\n  },\n  {\n    \"id\": 797,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"EMERGENCY\"\n    },\n    \"timestamp\": \"2026-10-08T02:28:55.182333Z\"\n  },\n  {\n    \"id\": 791,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"MANUAL\"\n    },\n    \"timestamp\": \"2026-10-08T02:23:56.923090Z\"\n  },\n  {\n    \"id\": 784,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:15:51.728716Z\"\n  },\n  {\n    \"id\": 781,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:15:43.784437Z\"\n  },\n  {\n    \"id\": 777,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"EMERGENCY\"\n    },\n    \"timestamp\": \"2026-10-08T02:15:20.314542Z\"\n  },\n  {\n    \"id\": 772,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:14:48.638316Z\"\n  },\n  {\n    \"id\": 765,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:12:49.419786Z\"\n  },\n  {\n    \"id\": 755,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:12:09.945281Z\"\n  },\n  {\n    \"id\": 751,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:12:01.888027Z\"\n  },\n  {\n    \"id\": 748,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:12:01.388203Z\"\n  },\n  {\n    \"id\": 745,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:12:00.891518Z\"\n  },\n  {\n    \"id\": 742,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:12:00.323712Z\"\n  },\n  {\n    \"id\": 739,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:59.827270Z\"\n  },\n  {\n    \"id\": 736,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:59.061683Z\"\n  },\n  {\n    \"id\": 733,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:18.514993Z\"\n  },\n  {\n    \"id\": 730,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:17.963187Z\"\n  },\n  {\n    \"id\": 727,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:17.427504Z\"\n  },\n  {\n    \"id\": 724,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:16.896724Z\"\n  },\n  {\n    \"id\": 721,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:15.796089Z\"\n  },\n  {\n    \"id\": 718,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:15.202184Z\"\n  },\n  {\n    \"id\": 715,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:13.217501Z\"\n  },\n  {\n    \"id\": 712,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:12.513826Z\"\n  },\n  {\n    \"id\": 709,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"EAST_WEST\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:11.923472Z\"\n  },\n  {\n    \"id\": 706,\n    \"junction_id\": \"A\",\n    \"event_type\": \"SIGNAL_CHANGED\",\n    \"direction\": null,\n    \"previous_state\": null,\n    \"new_state\": null,\n    \"command_id\": null,\n    \"details\": {\n      \"active_phase\": \"NORTH_SOUTH\",\n      \"mode\": \"AUTOMATIC\"\n    },\n    \"timestamp\": \"2026-10-08T02:11:11.345848Z\"\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Advance Transition Step (Tick)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/tick",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "tick"
+              ]
+            },
+            "description": "Fast-forwards state machine transition step immediately without waiting real-world seconds (Evaluator convenience)."
+          },
+          "response": [
+            {
+              "name": "Advance Transition Step (Tick)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/tick",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "tick"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:53:46 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "645"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"junction_id\": \"A\",\n  \"name\": \"Factory Road Intersection A\",\n  \"mode\": \"AUTOMATIC\",\n  \"current_phase\": \"EAST_WEST\",\n  \"target_phase\": \"NORTH_SOUTH\",\n  \"transition_step\": \"YELLOW_CLEARING\",\n  \"controller_status\": \"OFFLINE\",\n  \"desired_signals\": {\n    \"NORTH\": \"RED\",\n    \"SOUTH\": \"RED\",\n    \"EAST\": \"YELLOW\",\n    \"WEST\": \"YELLOW\"\n  },\n  \"actual_signals\": {\n    \"NORTH\": \"RED\",\n    \"SOUTH\": \"RED\",\n    \"EAST\": \"YELLOW\",\n    \"WEST\": \"YELLOW\"\n  },\n  \"queues\": {\n    \"NORTH\": 6,\n    \"SOUTH\": 0,\n    \"EAST\": 1,\n    \"WEST\": 0\n  },\n  \"emergency_active\": false,\n  \"emergency_direction\": null,\n  \"manual_requested_direction\": null,\n  \"green_duration\": 30,\n  \"yellow_duration\": 5,\n  \"all_red_duration\": 2,\n  \"created_at\": \"2026-10-07T22:14:51.785374Z\",\n  \"updated_at\": \"2026-10-08T05:50:52.314860Z\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Reset Junction to Clean State",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/junctions/A/reset",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "junctions",
+                "A",
+                "reset"
+              ]
+            },
+            "description": "Resets Junction A queues and state back to default clean testbed state."
+          },
+          "response": [
+            {
+              "name": "Reset Junction to Clean State",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8000/api/junctions/A/reset",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8000",
+                  "path": [
+                    "api",
+                    "junctions",
+                    "A",
+                    "reset"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Thu, 08 Oct 2026 05:54:14 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "WSGIServer/0.2 CPython/3.12.10"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "vary",
+                  "value": "Accept, Cookie, origin"
+                },
+                {
+                  "key": "allow",
+                  "value": "POST, OPTIONS"
+                },
+                {
+                  "key": "x-frame-options",
+                  "value": "DENY"
+                },
+                {
+                  "key": "content-length",
+                  "value": "63"
+                },
+                {
+                  "key": "x-content-type-options",
+                  "value": "nosniff"
+                },
+                {
+                  "key": "referrer-policy",
+                  "value": "same-origin"
+                },
+                {
+                  "key": "cross-origin-opener-policy",
+                  "value": "same-origin"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"status\": \"SUCCESS\",\n  \"message\": \"Junction A reset successfully.\"\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Audit trail logging and simulation fast-forwarding helpers (Section 10.6 & 11)."
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api"
+    },
+    {
+      "key": "junctionId",
+      "value": "A"
+    },
+    {
+      "key": "adminToken",
+      "value": "factory-admin-token-2026"
+    }
+  ]
+}

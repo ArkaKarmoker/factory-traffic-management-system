@@ -1,1 +1,313 @@
-# factory-traffic-management-system
+# Factory Traffic Management System (FTMS) 🚦🏭
+
+> **CSI Smart Tech Ltd — Backend Developer Intern Technical Assessment**  
+> Candidate: **Arka Karmoker** ([LinkedIn](https://linkedin.com/in/arkakarmoker) • [GitHub](https://github.com/ArkaKarmoker))  
+> Repository: `factory-traffic-management-system`
+
+---
+
+## 📑 Table of Contents
+1. [Executive Summary & System Architecture](#1-executive-summary--system-architecture)
+2. [Traffic Control Domain Logic & State Machine](#2-traffic-control-domain-logic--state-machine)
+3. [Scheduling & Priority Scoring Algorithm](#3-scheduling--priority-scoring-algorithm)
+4. [Tech Stack & Justification](#4-tech-stack--justification)
+5. [Quick Start & Setup Guide](#5-quick-start--setup-guide)
+   - [Option A: One-Command Docker Compose (Recommended)](#option-a-one-command-docker-compose-recommended)
+   - [Option B: Local Development Setup](#option-b-local-development-setup)
+6. [API Endpoints & Documentation](#6-api-endpoints--documentation)
+7. [Automated Test Suite & Verification](#7-automated-test-suite--verification)
+8. [Demonstrating the Evaluation Scenarios](#8-demonstrating-the-evaluation-scenarios)
+9. [Assumptions / Questions / Requirement Issues](#9-assumptions--questions--requirement-issues)
+10. [Architectural Decisions & Trade-offs](#10-architectural-decisions--trade-offs)
+11. [AI / Tool Usage](#11-ai--tool-usage)
+
+---
+
+## 1. Executive Summary & System Architecture
+
+The **Factory Traffic Management System (FTMS)** is an event-driven, safety-critical traffic control platform designed for internal roadways within a garment manufacturing facility. It governs intersection signals (Junction A) across four directions (`NORTH`, `SOUTH`, `EAST`, `WEST`) serving diverse vehicular traffic: **Forklifts**, **Delivery Trucks**, **Employee Transports**, and **Emergency Responders**.
+
+Unlike a simple CRUD application, FTMS functions as a deterministic state machine and discrete-event control system.
+
+### Architectural Diagram (Hexagonal / Clean Architecture)
+
+```text
++-----------------------------------------------------------------------------------------------+
+|                                    FRONTEND CLIENT LAYER                                      |
+|             Next.js 14+ (App Router) + TypeScript + Tailwind CSS + shadcn/ui                  |
+|          (Visual 4-Way Intersection, Telemetry Verification, Evaluator Simulator Form)        |
++-----------------------------------------------+-----------------------------------------------+
+                                                | HTTP REST / JSON
++-----------------------------------------------v-----------------------------------------------+
+|                                    COMMUNICATION & API LAYER                                  |
+|               Django REST Framework (DRF) + drf-spectacular (OpenAPI 3.0 / Swagger UI)        |
+|             (/api/sensor-events, /api/junctions/:id/status, /api/commands, /api/history)      |
++-----------------------------------------------+-----------------------------------------------+
+                                                | Clean DTOs & Intent Commands
++-----------------------------------------------v-----------------------------------------------+
+|                              CORE DOMAIN ENGINE (traffic_engine/)                             |
+|    Pure Python 3.12 (Zero HTTP/DB/Framework Coupling - Testable in Microseconds)             |
+|    - Deterministic Finite State Machine (FSM): GREEN -> YELLOW -> ALL_RED -> GREEN            |
+|    - Composite Priority Scheduler: Queue Size + Vehicle Priority + Starvation Threshold       |
+|    - Strict Invariant Guard: Conflicting Greens are mathematically impossible                 |
++-----------------------+-----------------------------------------------+-----------------------+
+                        |                                               |
+                        v                                               v
++-----------------------+-----------------------+   +-------------------+-----------------------+
+|              PERSISTENCE LAYER                |   |          CONTROLLER INTERFACE / PORT      |
+|  PostgreSQL 16 (Docker) / SQLite 3 (Dev)      |   |  TrafficControllerPort (Abstract Port)    |
+|  - Idempotency Event Table (ProcessedEvent)   |   |  - RESTSimulatorAdapter (Active Adapter)  |
+|  - Concurrency Lock: select_for_update()      |   |  - MQTTControllerAdapter (Future Plug)    |
+|  - Immutable Audit History (AuditLog)         |   |  - Correlation via unique command_id      |
++-----------------------------------------------+   +-------------------------------------------+
+```
+
+---
+
+## 2. Traffic Control Domain Logic & State Machine
+
+The core traffic engine strictly decouples non-conflicting traffic phases:
+* **Phase 1:** `NORTH + SOUTH`
+* **Phase 2:** `EAST + WEST`
+
+### Absolute Safety Invariants
+1. **Zero Conflicting Green:** Conflicting movements (e.g. North and East) must **NEVER** be simultaneously green. A `SafetyInvariantViolation` is raised if an invalid state is calculated.
+2. **Mandatory Safe Sequence:** A green phase can **NEVER** switch directly into an opposing green phase. It must transition through the clearance sequence:
+   $$\text{ACTIVE GREEN (30s)} \longrightarrow \text{YELLOW (5s)} \longrightarrow \text{ALL\_RED CLEARANCE (2s)} \longrightarrow \text{TARGET GREEN (30s)}$$
+3. **Emergency Preemption Safety:** An approaching emergency vehicle immediately interrupts normal green timing, but **does not violate the safety sequence** (it triggers `YELLOW -> ALL_RED -> EMERGENCY GREEN`).
+4. **Manual Override Safety:** Administrator commands specify an *intent* (e.g., `MANUAL_GREEN_REQUEST` on `WEST`), and the backend safely orchestrates the transition. Direct arbitrary signal overwrites are prohibited.
+
+---
+
+## 3. Scheduling & Priority Scoring Algorithm
+
+In `AUTOMATIC` mode, phase switching is decided by a composite priority scoring formula evaluated by `TrafficScheduler`:
+
+$$\text{DirectionScore} = \sum_{v \in \text{queue}} \left( W_{\text{type}} + (\text{WaitTime} \times 0.8) + \text{StarvationBonus} \right)$$
+
+### Vehicle Priority Weights
+| Vehicle Type | Weight ($W_{\text{type}}$) | Description |
+| :--- | :---: | :--- |
+| **EMERGENCY** | **1000.0** | Dominates scheduling, initiates immediate preemption |
+| **TRUCK** | **25.0** | High factory throughput priority |
+| **FORKLIFT** | **15.0** | Material handling movement |
+| **EMPLOYEE_VEHICLE** | **5.0** | General transit |
+
+### Anti-Starvation Protection
+If any vehicle waits in queue for longer than **45 seconds** (`STARVATION_THRESHOLD_SECONDS`), an automatic **+80.0 score boost** is injected. This mathematically prevents low-priority employee vehicles or forklifts from waiting indefinitely when heavier truck traffic is present.
+
+---
+
+## 4. Tech Stack & Justification
+
+| Layer | Technology | Justification |
+| :--- | :--- | :--- |
+| **Backend Core** | **Python 3.12 + Django 5/6 + Django REST Framework** | Aligned with job post requirements and resume strengths; provides robust transaction locking, serializers, and scalability. |
+| **Domain Logic** | **Pure Python (`traffic_engine/`)** | Zero framework coupling. Implements Hexagonal Ports & Adapters (`ControllerPort`) for seamless MQTT pluggability. |
+| **Database** | **PostgreSQL 16 (Docker) / SQLite 3 (Dev)** | Relational integrity; `select_for_update()` row locking prevents race conditions. SQLite default enables zero-config evaluation. |
+| **Frontend** | **Next.js 14+ (App Router) + TypeScript + Tailwind CSS + shadcn/ui** | High-performance industrial dashboard; mobile-responsive; real-time adaptive sync; interactive evaluator simulator. |
+| **API Docs** | **drf-spectacular (OpenAPI 3.0 / Swagger UI) + Postman Collection** | Live interactive documentation at `/api/docs/` and ready-to-import `postman_collection.json`. |
+| **Containerization** | **Docker & Docker Compose** | Multi-container setup for one-command deployment. |
+
+---
+
+## 5. Quick Start & Setup Guide
+
+### Option A: One-Command Docker Compose (Recommended)
+
+Requires Docker Desktop installed.
+
+```bash
+# Clone the repository
+git clone https://github.com/ArkaKarmoker/factory-traffic-management-system.git
+cd factory-traffic-management-system
+
+# Build and start Backend, Frontend, and PostgreSQL
+docker compose up --build
+```
+
+* **Frontend Dashboard:** [http://localhost:3000](http://localhost:3000)
+* **Backend API & Swagger Docs:** [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)
+* **Default Admin Token:** `factory-admin-token-2026`
+
+---
+
+### Option B: Local Development Setup
+
+#### 1. Backend Setup (Python 3.12)
+```bash
+cd backend
+
+# Create and activate virtual environment
+python -m venv venv
+.\venv\Scripts\activate       # On Windows PowerShell
+# source venv/bin/activate    # On Linux/macOS
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations & seed Junction A
+python manage.py migrate
+python manage.py seed_junction
+
+# Start Django development server
+python manage.py runserver 127.0.0.1:8000
+```
+
+#### 2. Frontend Setup (Next.js)
+Open a second terminal:
+```bash
+cd frontend
+
+# Install node dependencies
+npm install
+
+# Start Next.js development server
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 6. API Endpoints & Documentation
+
+Interactive Swagger UI is live at: `http://localhost:8000/api/docs/`  
+An exportable Postman collection is located at: [`postman_collection.json`](postman_collection.json).
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/junctions` | List all registered junctions |
+| `GET` | `/api/junctions/:id` | Get junction configuration and status |
+| `GET` | `/api/junctions/:id/status` | Real-time telemetry, desired vs actual signals, queues |
+| `POST` | `/api/sensor-events` | Ingest vehicle arrivals / departures (Idempotent) |
+| `POST` | `/api/junctions/:id/commands` | Administrative manual override (`MANUAL_GREEN_REQUEST`) |
+| `POST` | `/api/controller-events` | Hardware ACK & device status simulation |
+| `GET` | `/api/junctions/:id/history` | Historical audit trail and transition logs |
+| `GET` | `/api/junctions/:id/queues` | Detailed list of waiting vehicles |
+| `POST` | `/api/junctions/:id/tick` | Advance transition timer by 1 step (Instant testing) |
+| `POST` | `/api/junctions/:id/reset` | Reset demo state to clean initial configuration |
+
+---
+
+## 7. Automated Test Suite & Verification
+
+The project includes **20 comprehensive automated tests** spanning pure domain safety invariants, REST API integration, and an explicit test suite covering all **Section 15 Functional Scenarios** mandated by the assessment specification.
+
+Run tests via `pytest`:
+```bash
+cd backend
+.\venv\Scripts\pytest
+```
+*Result: `20 passed in 0.61s`*
+
+### Test Suites Breakdown
+1. **`test_domain_engine.py` (5 Pure Python Unit Tests):**
+   * Confirms `SafetyInvariantViolation` raised on conflicting greens.
+   * Verifies valid non-conflicting phases (`NORTH_SOUTH`, `EAST_WEST`).
+   * Validates deterministic sequence: `STEADY -> YELLOW (5s) -> ALL_RED (2s) -> NEXT_STEADY`.
+   * Asserts emergency priority dominates scheduling over all vehicle types.
+   * Tests anti-starvation boost (>45s wait threshold score jump).
+
+2. **`test_api_endpoints.py` (6 REST API Integration Tests):**
+   * Deduplication idempotency (`event_id` reuse returns HTTP 200 `DUPLICATE_IGNORED`).
+   * Vehicle clearance & non-negative queue guard (`queue >= 0`).
+   * Emergency preemption triggering yellow clearance.
+   * Manual command override & return to automatic mode.
+   * Physical controller offline degraded state.
+   * Status & audit history query endpoints.
+
+3. **`test_section15_scenarios.py` (9 End-to-End Functional Scenario Tests):**
+   * **Scenario 1:** Normal traffic ingestion across directions.
+   * **Scenario 2:** Priority traffic weighting (Truck/Forklift vs Employee car).
+   * **Scenario 3:** Emergency preemption during conflicting green.
+   * **Scenario 4:** Manual override by administrator and return to automatic.
+   * **Scenario 5:** Duplicate sensor event idempotency guarantee.
+   * **Scenario 6:** Vehicle departure clearance & empty queue handling.
+   * **Scenario 7:** Controller failure & fail-safe degraded fallback.
+   * **Scenario 8:** Application restart data persistence & state recovery.
+   * **Scenario 9:** High-concurrency race condition test (simultaneous events at T=0ms, 4ms, 8ms, 12ms, 17ms with DB row locks).
+
+---
+
+## 8. Demonstrating the Evaluation Scenarios
+
+The Next.js dashboard provides a dedicated **Evaluator Test Simulator**:
+
+1. **Normal & Priority Traffic:**
+   - Under *Vehicles & Queues* tab, select `EAST`, choose `TRUCK`, and click **Simulate Arrival**.
+   - Notice the queue increase and scheduling preference over employee vehicles.
+2. **Emergency Preemption (Section 7):**
+   - Click the *Emergency Siren* tab, and click **Ambulance on EAST**.
+   - Observe the North/South lights transition to **YELLOW**, then **ALL-RED**, then **EAST GREEN**.
+3. **Manual Override (Section 8):**
+   - In the *Supervisor Manual Override* panel, click **Green WEST**.
+   - The system initiates safe transition and holds WEST green.
+   - Click **Return to AUTOMATIC Engine** to restore auto-scheduling.
+4. **Duplicate Event Idempotency (Section 4):**
+   - Send any vehicle arrival. Then click the purple **Test Idempotency (Resend)** button.
+   - The toast indicates the duplicate `event_id` was safely ignored.
+5. **Controller Failure & State Mismatch Verification (Section 9 & 14.6):**
+   - Under *Controller Hardware* tab, click **Simulate Controller OFFLINE**.
+   - The junction immediately enters **DEGRADED** mode and commands **Desired ALL-RED**.
+   - Notice the amber **State Mismatch Detected** warning banner: since the hardware controller is offline, the backend strictly preserves Section 9 invariants and does not fabricate physical confirmation telemetry.
+   - Click **Simulate Controller ONLINE** to restore normal operation and resynchronize telemetry.
+
+---
+
+## 9. Assumptions / Questions / Requirement Issues
+
+As instructed in Section 17 & 19 of the assessment specification, several requirements were intentionally incomplete or ambiguous. Below is the documentation of identified issues and engineering decisions:
+
+### 1. Authoritative Timestamp & Network Delays
+* **Issue:** Sensor events include a client timestamp, server arrival time, and sequence number. Late or delayed events could cause race conditions.
+* **Decision:** We record `sensor_timestamp` for audit logging, but **server receipt time (`processed_at`) inside a database transaction is authoritative** for queue FIFO order and transition timers.
+
+### 2. Idempotency vs. Out-of-Order Retries
+* **Issue:** The spec asks how duplicate and out-of-order events should be treated.
+* **Decision:** We introduced a dedicated `ProcessedEvent` table keyed on `event_id`. Duplicate arrivals are returned with HTTP 200 `DUPLICATE_IGNORED` and do not alter queues. Sequence numbers are verified to ignore stale events.
+
+### 3. Vehicle Clearance Without Prior Arrival
+* **Issue:** What happens if a `VEHICLE_CLEARED` event arrives for a vehicle never registered or when queue is 0?
+* **Decision:** The system strictly enforces `queue >= 0`. If a clearance arrives for an unrecorded vehicle or empty queue, it logs a `VEHICLE_CLEARED_EMPTY_QUEUE_IGNORED` audit entry and keeps queue at 0, preventing negative numbers.
+
+### 4. Competing Emergency Vehicles from Conflicting Directions
+* **Issue:** What if an ambulance approaches from NORTH and another from EAST simultaneously?
+* **Decision:** The first arrived emergency holds priority. The opposing emergency is queued with maximum priority score ($1000.0+$). Once the first emergency departs (`VEHICLE_CLEARED`), the engine immediately preempts to the opposing emergency.
+
+### 5. Manual Override Duration & Operator Disconnect
+* **Issue:** How long does manual control stay active if an administrator disconnects?
+* **Decision:** Manual override represents an intentional operational takeover (e.g., dedicated conveyor crossing, facility maintenance, or heavy machinery clearance). Therefore, **manual mode persists indefinitely on hold until an authorized operator explicitly commands `RETURN_TO_AUTOMATIC`** (or a higher-priority emergency vehicle preempts it for life safety). This ensures that traffic remains strictly under operator command and does not unexpectedly auto-switch.
+
+### 6. Desired State vs. Actual State Discrepancy & Offline Controller Handling
+* **Issue:** What if the controller reports `OFFLINE` or fails to acknowledge a requested signal change? Should the backend assume physical lights are RED?
+* **Decision:** Pursuant to Section 9 (*"A controller that does not confirm a requested state must not automatically be assumed to have executed it"*), the backend switches to `DEGRADED` mode and sets `desired_signals` to **ALL-RED** for safety, but **refuses to fabricate actual physical confirmation**. The physical `actual_signals` remain unconfirmed at their last known state, triggering the **State Mismatch Alert** across the dashboard until telemetry is restored via `ONLINE` or subsequent ACK.
+
+### 7. Application Restart During Active Transition
+* **Issue:** How to recover if the server crashes while in `YELLOW` or `ALL_RED`?
+* **Decision:** Upon boot / recovery, the engine inspects active transitions. Rather than assuming the hardware completed the transition, it issues an immediate `ALL_RED_CLEARANCE` command to the controller to reset the intersection safely before resuming normal scheduling.
+
+---
+
+## 10. Architectural Decisions & Trade-offs
+
+1. **Hexagonal Architecture (Ports & Adapters):**
+   - The core `traffic_engine` is pure Python standard library (`dataclasses`, `enum`, `typing`).
+   - The `TrafficControllerPort` abstract class allows replacing the current REST simulator with an MQTT adapter (`MQTTControllerAdapter`) without altering a single line of domain logic.
+2. **Database Row Locking (`select_for_update`):**
+   - To prevent concurrent events from causing race conditions, junction state mutations are wrapped in Django atomic transactions with `select_for_update()`.
+3. **Non-blocking Daemon Timer:**
+   - Rather than blocking HTTP request threads with `time.sleep()`, transitions are stepped via a background worker thread (`TrafficBackgroundWorker`) and exposed via `/api/junctions/:id/tick`.
+
+---
+
+## 11. AI / Tool Usage
+
+As requested in Section 18.12 and the submission form, modern AI-assisted tools were utilized during this assessment:
+
+* **Tools Used:** Antigravity AI Pair-Programming Assistant (Google Gemini 3.8 Flash model).
+* **Scope of Usage:**
+  - Rapid scaffolding of Django REST Framework serializers and views.
+  - Designing TypeScript interfaces and Tailwind CSS layout components for Next.js.
+  - Writing automated pytest fixtures and edge-case unit tests.
+  - Formatting OpenAPI schema decorators and Postman collection JSON.
+* **Engineering Accountability:** All architectural choices, safety invariants, state machine transitions, concurrency locks, and requirement issue decisions were planned, reviewed, and validated for technical correctness. The author is fully prepared to explain, debug, and modify any component of this codebase during the technical review.
