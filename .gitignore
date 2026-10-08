@@ -67,6 +67,9 @@ db.sqlite3-journal
 *.sqlite3-wal
 *.sqlite3-shm
 **/db.sqlite3*
+staticfiles/
+backend/staticfiles/
+
 
 
 # Flask stuff:

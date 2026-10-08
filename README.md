@@ -21,10 +21,12 @@ An event-driven, safety-critical traffic control system designed for internal ro
 👨‍💻 **Developed by:** [Arka Karmoker](https://github.com/ArkaKarmoker) • [LinkedIn](https://linkedin.com/in/arkakarmoker)  
 📧 **Email:** [arkakarmoker1234@gmail.com](mailto:arkakarmoker1234@gmail.com)  
 🌐 **Live Frontend Dashboard (Vercel):** [https://ftms-csi.vercel.app](https://ftms-csi.vercel.app)  
-🚀 **Live Backend API (Render):** [https://factory-traffic-management-system.onrender.com/api/junctions](https://factory-traffic-management-system.onrender.com/api/junctions)  
-🩺 **Live Health Probe:** [https://factory-traffic-management-system.onrender.com/api/health](https://factory-traffic-management-system.onrender.com/api/health)  
+🚀 **Live Backend API (Render):** [https://factory-traffic-management-system.onrender.com](https://factory-traffic-management-system.onrender.com)  
+🖥️ **Live DRF Browsable API:** [https://factory-traffic-management-system.onrender.com/api/junctions](https://factory-traffic-management-system.onrender.com/api/junctions)  
+📖 **Interactive API Docs (Swagger UI):** [https://factory-traffic-management-system.onrender.com/api/docs/](https://factory-traffic-management-system.onrender.com/api/docs/)  
+📘 **ReDoc Documentation:** [https://factory-traffic-management-system.onrender.com/api/redoc/](https://factory-traffic-management-system.onrender.com/api/redoc/)  
 📑 **Postman Collection:** [`postman_collection.json`](./postman_collection.json)  
-📖 **Interactive API Docs (Swagger):** [https://factory-traffic-management-system.onrender.com/api/docs/](https://factory-traffic-management-system.onrender.com/api/docs/)
+🩺 **Live Health Probe:** [https://factory-traffic-management-system.onrender.com/api/health](https://factory-traffic-management-system.onrender.com/api/health)
 
 > [!NOTE]
 > **CSI Smart Tech Technical Assessment Submission:** This project implements the complete **Factory Traffic Management System (Assessment V2)** specification with zero conflicting greens, deterministic clearance sequences (`GREEN -> YELLOW -> ALL-RED -> GREEN`), priority scheduling with anti-starvation, row-level concurrency locking (`select_for_update`), 24/24 automated pytest tests, Docker Compose orchestration, and 24/7 cloud deployment.
@@ -43,6 +45,7 @@ An event-driven, safety-critical traffic control system designed for internal ro
 - [Priority Scheduling & Anti-Starvation Engine](#-priority-scheduling--anti-starvation-engine)
 - [Local Setup & Installation Guide](#-local-setup--installation-guide)
 - [Live Cloud Deployment (Render & Vercel)](#-live-cloud-deployment-render--vercel)
+- [API Documentation & Live Explorers](#-api-documentation--live-explorers)
 - [API Endpoints Reference](#-api-endpoints-reference)
 - [Postman Collection](#-postman-collection)
 - [Comprehensive Automated Testing](#-comprehensive-automated-testing)
@@ -405,22 +408,53 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 🌐 Live Cloud Deployment (Render & Vercel)
 
-The system is deployed and publicly accessible in production:
+The system is deployed and publicly accessible in production across high-availability cloud platforms:
 
-* **Frontend Dashboard (Vercel):** [https://ftms-csi.vercel.app](https://ftms-csi.vercel.app)
-* **Backend API (Render):** [https://factory-traffic-management-system.onrender.com](https://factory-traffic-management-system.onrender.com)
-* **Live Health Check Probe:** [https://factory-traffic-management-system.onrender.com/api/health](https://factory-traffic-management-system.onrender.com/api/health)
+| Component | Platform | URL / Endpoint | Details |
+| :--- | :--- | :--- | :--- |
+| **Interactive Dashboard** | **Vercel** | [https://ftms-csi.vercel.app](https://ftms-csi.vercel.app) | Next.js 14 App Router, Global Edge CDN |
+| **Backend REST API** | **Render** | [https://factory-traffic-management-system.onrender.com](https://factory-traffic-management-system.onrender.com) | Python 3.12 Web Service (Gunicorn WSGI) |
+| **DRF Browsable API** | **Render** | [https://factory-traffic-management-system.onrender.com/api/junctions](https://factory-traffic-management-system.onrender.com/api/junctions) | Django REST Framework interactive HTML UI |
+| **Swagger UI Explorer** | **Render** | [https://factory-traffic-management-system.onrender.com/api/docs/](https://factory-traffic-management-system.onrender.com/api/docs/) | OpenAPI 3.0 Interactive Testing Console |
+| **ReDoc Documentation** | **Render** | [https://factory-traffic-management-system.onrender.com/api/redoc/](https://factory-traffic-management-system.onrender.com/api/redoc/) | Detailed 3-panel schema specification |
+| **OpenAPI 3.0 Schema** | **Render** | [https://factory-traffic-management-system.onrender.com/api/schema/](https://factory-traffic-management-system.onrender.com/api/schema/) | Machine-readable OpenAPI 3.0 YAML/JSON |
+| **Health Check Probe** | **Render** | [https://factory-traffic-management-system.onrender.com/api/health](https://factory-traffic-management-system.onrender.com/api/health) | Lightweight probe for UptimeRobot monitoring |
 
-### Deployment Architecture
-* **Frontend on Vercel:** Next.js 14 App Router, static assets served via global edge CDN, environment variable `NEXT_PUBLIC_API_URL` pointing to Render.
-* **Backend on Render:** Python 3.12 Web Service powered by Gunicorn with auto-migration and startup data seeding (`core.wsgi:application`). Runs with SQLite 3 (WAL mode) on cloud, while local Docker Compose uses PostgreSQL 16.
-* **24/7 Keep-Alive Monitoring:** Configured via UptimeRobot pinging `/api/health` every 5 minutes to prevent free-tier container sleep.
+### Deployment Architecture & Reliability
+* **Frontend on Vercel:** Next.js 14 App Router built with standalone output. Static assets served via global edge CDN, connecting via `NEXT_PUBLIC_API_URL` to Render backend with automatic reconnect retry.
+* **Backend on Render:** Python 3.12 Web Service powered by Gunicorn (`core.wsgi:application`). Built with automatic migration and startup data seeding hooks. Static assets served via WhiteNoise with compressed caching.
+* **24/7 Keep-Alive Monitoring:** Configured via **UptimeRobot** pinging `/api/health` every 5 minutes to eliminate free-tier container sleep and guarantee instant response times.
+
+---
+
+## 📖 API Documentation & Live Explorers
+
+The API provides multiple interactive documentation interfaces for seamless testing and technical evaluation:
+
+### 1. Django REST Framework Browsable API
+* **Live Production:** [https://factory-traffic-management-system.onrender.com/api/junctions](https://factory-traffic-management-system.onrender.com/api/junctions)
+* **Local Development:** [http://localhost:8000/api/junctions](http://localhost:8000/api/junctions)
+* **Intelligent Content Negotiation:**
+  * When accessed via **Web Browser** (`Accept: text/html`), DRF automatically renders the interactive **Browsable API HTML interface**, complete with interactive forms, headers, and formatted JSON viewer.
+  * When accessed via **Next.js Frontend, Postman, or IoT Clients** (`Accept: application/json`), the backend automatically returns pure **Raw JSON**.
+
+### 2. Swagger UI (OpenAPI 3.0 Interactive Explorer)
+* **Live Production:** [https://factory-traffic-management-system.onrender.com/api/docs/](https://factory-traffic-management-system.onrender.com/api/docs/)
+* **Local Development:** [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)
+* Powered by `drf-spectacular`. Allows evaluators to test live requests with custom request payloads and `X-Admin-Token` authentication directly from the browser.
+
+### 3. ReDoc Documentation
+* **Live Production:** [https://factory-traffic-management-system.onrender.com/api/redoc/](https://factory-traffic-management-system.onrender.com/api/redoc/)
+* **Local Development:** [http://localhost:8000/api/redoc/](http://localhost:8000/api/redoc/)
+* Clean, 3-panel schema specification detailing data models, parameters, and status response codes.
+
+### 4. Raw OpenAPI 3.0 Schema
+* **Live Production:** [https://factory-traffic-management-system.onrender.com/api/schema/](https://factory-traffic-management-system.onrender.com/api/schema/)
+* Machine-readable YAML/JSON schema ready for Swagger Codegen, Postman import, or automated contract testing.
 
 ---
 
 ## 📡 API Endpoints Reference
-
-Interactive Swagger documentation is available at `/api/docs/`.
 
 ### Minimum Backend APIs (Section 10 Compliance)
 
